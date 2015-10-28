@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app='task_list'>
+<head>
+	<title>Task Management</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
+	<script type="text/javascript" src='script.js'></script>
+	<style type="text/css">
+		#container {
+			padding: 5px;
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id='container' ng-controller='tasksController'>
+		<h3>Tasks</h3>
+		<table class='table table-bordered'>
+			<th>Tasks</th>
+			<th>Priority</th>
+			<th>Deadline</th>
+			<th>Created</th>
+			<th>Actions</th>
+			<tr ng-repeat='task in tasks'>
+				<td><span ng-bind='task.name'></span></td>
+				<td><span ng-bind='task.priority'></span></td>
+				<td><span ng-bind='task.deadline | date: "MMMM d yyyy"'></span></td>
+				<td><span ng-bind='task.created | date: "MMMM d yyyy"'></span></td>
+				<td><button ng-click='removeTask(task)' class="btn btn-danger">Remove</button</td>
+			</tr>
+		</table>
+		<hr>
+		<h3>Add a new task</h3>
+		<form class='col-md-3'>
+			<div class='form-group'>
+				<label for='name'>Task Name:</label>
+				<input type='text' id='name' ng-model='newTask.name' class='form-control'>
+				<label for='priority'></label>
+				<select id='priority' ng-model='newTask.priority' class='form-control' width:50 >
+					<option>HIGH</option>
+					<option>MEDIUM</option>
+					<option>LOW</option>
+				</select>
+				<label for='deadline'>Deadline</label>
+				<input type='date' id='deadline' ng-model='newTask.deadline' class='form-control'>
+				<input type='submit' value='create' ng-click='addTask()' class="btn btn-success">
+			</div>
+		</form>
+	</div>
+</body>
+</html>
